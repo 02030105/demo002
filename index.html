@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>儿童识字小报生成器</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎨 儿童识字小报生成器</h1>
+            <p>专为5-9岁儿童设计的智能学习材料生成工具</p>
+        </div>
+
+        <div class="main-content">
+            <!-- API密钥配置区域 -->
+            <div class="api-section">
+                <h3>🔑 API密钥配置</h3>
+                <div class="api-status">
+                    <span class="status-indicator" id="statusIndicator"></span>
+                    <span id="statusText">未配置API密钥</span>
+                </div>
+                <div class="form-group">
+                    <label for="apiKey">Nano Banana Pro API 密钥</label>
+                    <input type="password" id="apiKey" placeholder="请输入您的API密钥">
+                    <div class="help-text">获取密钥地址: <a href="https://kie.ai/api-key" target="_blank">https://kie.ai/api-key</a></div>
+                </div>
+                <div class="message success" id="apiSuccessMessage"></div>
+                <div class="message error" id="apiErrorMessage"></div>
+            </div>
+
+            <!-- 生成配置区域 -->
+            <div class="form-group">
+                <label for="scene">选择场景</label>
+                <select id="scene" onchange="updateVocabularyPreview()">
+                    <option value="">请选择场景</option>
+                    <option value="超市">超市</option>
+                    <option value="医院">医院</option>
+                    <option value="公园">公园</option>
+                    <option value="学校">学校</option>
+                    <option value="动物园">动物园</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="title">小报标题</label>
+                <input type="text" id="title" placeholder="请输入小报标题，如：快乐超市、有趣的动物园">
+            </div>
+
+            <!-- 词汇预览 -->
+            <div class="vocabulary-preview" id="vocabularyPreview" style="display: none;">
+                <h4>📚 场景词汇预览</h4>
+                <div id="vocabularyList" class="vocabulary-list"></div>
+            </div>
+
+            <!-- 生成按钮组 -->
+            <div class="btn-group">
+                <button class="btn btn-success" onclick="testApiKey()">
+                    <span>🔍</span> 测试连接
+                </button>
+                <button class="btn btn-primary" id="generateBtn" onclick="generateImage()">
+                    <span>✨</span> 生成小报
+                </button>
+                <button class="btn btn-secondary" onclick="clearAll()">
+                    <span>🔄</span> 清空重置
+                </button>
+            </div>
+
+            <!-- 加载状态 -->
+            <div class="loading-container" id="loadingContainer">
+                <div class="spinner"></div>
+                <p id="loadingText">正在生成中...</p>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <p id="loadingStatus">准备中...</p>
+                <p id="taskIdDisplay" style="font-size: 12px; color: #666; margin-top: 5px;"></p>
+            </div>
+
+            <!-- 结果展示 -->
+            <div class="result-container" id="resultContainer">
+                <h3>🎉 生成成功！</h3>
+                <img id="resultImage" class="result-image" alt="儿童识字小报">
+                <div class="btn-group">
+                    <button class="btn btn-success" onclick="downloadImage()">
+                        <span>💾</span> 保存图片
+                    </button>
+                    <button class="btn btn-primary" onclick="resetForm()">
+                        <span>🔄</span> 重新生成
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
